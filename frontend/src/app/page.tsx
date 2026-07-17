@@ -18,7 +18,7 @@ import {
   Sparkles,
   Code2
 } from "lucide-react";
-import { HeroCoinsCube, ShieldSecurityCube, ContractCube } from "@/components/GoldCubeSvg";
+
 
 export default function Home() {
   const { publicKey, connect } = useWallet();
@@ -149,7 +149,13 @@ export default function Home() {
         <div className="w-full lg:w-1/2 flex justify-center lg:justify-end relative">
           <div className="absolute inset-0 radial-glow z-0" />
           <div className="relative z-10 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] hover:scale-105 transition-transform duration-500">
-            <HeroCoinsCube className="w-full h-full" />
+            <Image
+              src="/recurring_payments.png"
+              alt="Recurring Payments"
+              fill
+              className="object-contain"
+              priority
+            />
           </div>
         </div>
       </section>
@@ -246,7 +252,12 @@ export default function Home() {
 
         {/* 3D Shield Illustration */}
         <div className="relative w-[180px] h-[180px] flex shrink-0 justify-center items-center z-10 hover:scale-105 transition-transform duration-500">
-          <ShieldSecurityCube className="w-full h-full" />
+          <Image
+            src="/security_trust.png"
+            alt="Security and Trust"
+            fill
+            className="object-contain"
+          />
         </div>
       </section>
 
@@ -324,7 +335,12 @@ export default function Home() {
             </div>
             
             <div className="relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] hover:rotate-3 transition-transform duration-500">
-              <ContractCube className="w-full h-full" />
+              <Image
+                src="/smart_contract_automation.png"
+                alt="Smart Contract Automation"
+                fill
+                className="object-contain"
+              />
             </div>
 
             <div className="bg-bg-primary border border-accent-primary/30 p-3 rounded-xl text-center shadow-lg relative -left-4">
