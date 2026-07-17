@@ -27,7 +27,7 @@ export const server = new rpc.Server(RPC_URL);
 export const CONTRACTS = {
   registry: deployments.registry_id,
   vault: deployments.vault_id,
-  token: "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC",
+  token: deployments.token_id,
 };
 
 // Check if dev mode is enabled
@@ -237,24 +237,49 @@ async function readContract(
 }
 
 /**
- * Fetches the real XLM balance for a user via Horizon API.
+ * Fetches the real CYC balance for a user via the token smart contract.
  */
 export async function fetchCycBalance(address: string): Promise<number> {
   try {
-    const res = await fetch(`https://horizon-testnet.stellar.org/accounts/${address}`);
-    if (!res.ok) {
-      console.error("Horizon account fetch failed:", res.status);
-      return 0;
-    }
-    const data = await res.json();
-    const nativeBalance = data.balances?.find(
-      (b: any) => b.asset_type === "native"
-    );
-    return nativeBalance ? parseFloat(nativeBalance.balance) : 0;
+    const res = await readContract(CONTRACTS.token, "balance", [
+      new Address(address).toScVal(),
+    ]);
+    return Number(res || 0);
   } catch (err) {
     console.error("fetchCycBalance error:", err);
     return 0;
   }
+}
+
+/**
+ * Faucet mint function. Mints 1,000 CYC tokens to the user's address using the deployer admin key.
+ */
+export async function mintCycToken(toAddress: string): Promise<string> {
+  const adminKp = Keypair.fromSecret("SACW7GKCZQMPGVFRXSMKFN6MRQG2DXAUQT6K625QKXMJCF4E7G3ZXBIC");
+  const adminAddr = adminKp.publicKey();
+  
+  const contract = new Contract(CONTRACTS.token);
+  const account = await server.getAccount(adminAddr);
+  
+  const tx = new TransactionBuilder(account, {
+    fee: "100",
+    networkPassphrase: NETWORK_PASSPHRASE,
+  })
+    .addOperation(
+      contract.call(
+        "mint",
+        new Address(toAddress).toScVal(),
+        nativeToScVal(BigInt(1000), { type: "i128" })
+      )
+    )
+    .setTimeout(30)
+    .build();
+    
+  const preparedTx = await server.prepareTransaction(tx);
+  preparedTx.sign(adminKp);
+  
+  const response = await sendTx(preparedTx.toXDR());
+  return response;
 }
 
 function normalizeStatus(status: any): number {

@@ -69,7 +69,7 @@ export default function PlansPage() {
     if (isNaN(amount) || amount < Number(selectedPlan.price)) {
       setTxResult({
         success: false,
-        msg: `Prefund amount must be at least the plan price of ${formatAmount(selectedPlan.price)} XLM.`,
+        msg: `Prefund amount must be at least the plan price of ${formatAmount(selectedPlan.price)} CYC.`,
       });
       return;
     }
@@ -77,7 +77,7 @@ export default function PlansPage() {
     if (amount > balance) {
       setTxResult({
         success: false,
-        msg: `Insufficient balance. You have ${formatAmount(balance)} XLM.`,
+        msg: `Insufficient balance. You have ${formatAmount(balance)} CYC.`,
       });
       return;
     }
@@ -111,7 +111,7 @@ export default function PlansPage() {
         <div className="space-y-2">
           <h1 className="text-3xl font-extrabold text-white">Browse Subscription Plans</h1>
           <p className="text-text-secondary text-sm">
-            Select a plan to subscribe. Prefund a custom amount of XLM to keep it active.
+            Select a plan to subscribe. Prefund a custom amount of CYC to keep it active.
           </p>
         </div>
 
@@ -191,7 +191,7 @@ export default function PlansPage() {
                   <div className="flex items-center text-sm text-text-secondary">
                     <DollarSign className="w-4 h-4 mr-1.5 text-text-secondary" />
                     <span className="text-text-primary font-bold">{formatAmount(plan.price)}</span>
-                    <span className="ml-1 text-xs">XLM / cycle</span>
+                    <span className="ml-1 text-xs">CYC / cycle</span>
                   </div>
                   <div className="flex items-center text-sm text-text-secondary">
                     <Clock className="w-4 h-4 mr-1.5 text-text-secondary" />
@@ -241,7 +241,7 @@ export default function PlansPage() {
               Subscribe to {selectedPlan.name}
             </h3>
             <p className="text-xs text-text-secondary mb-6">
-              Create a vault subscription. You must lock at least one cycle fee ({formatAmount(selectedPlan.price)} XLM).
+              Create a vault subscription. You must lock at least one cycle fee ({formatAmount(selectedPlan.price)} CYC).
             </p>
 
             <form onSubmit={handleSubscribeSubmit} className="space-y-4">
@@ -252,7 +252,7 @@ export default function PlansPage() {
                 <div className="bg-bg-primary border border-border-subtle p-3.5 rounded-xl flex justify-between text-xs">
                   <div>
                     <span className="text-text-secondary">Fee:</span>
-                    <span className="text-white font-bold ml-1">{formatAmount(selectedPlan.price)} XLM</span>
+                    <span className="text-white font-bold ml-1">{formatAmount(selectedPlan.price)} CYC</span>
                   </div>
                   <div>
                     <span className="text-text-secondary">Billing Cycle:</span>
@@ -263,7 +263,7 @@ export default function PlansPage() {
 
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-text-secondary uppercase">
-                  Prefund Deposit Amount (XLM)
+                  Prefund Deposit Amount (CYC)
                 </label>
                 <input
                   type="number"
@@ -274,7 +274,7 @@ export default function PlansPage() {
                   className="w-full bg-bg-primary border border-border-subtle text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-accent-primary"
                 />
                 <span className="text-[10px] text-text-secondary block">
-                  Wallet Balance: {formatAmount(balance)} XLM
+                  Wallet Balance: {formatAmount(balance)} CYC
                 </span>
               </div>
 

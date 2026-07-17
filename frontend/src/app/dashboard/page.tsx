@@ -54,9 +54,8 @@ export default function DashboardPage() {
   useEffect(() => {
     if (publicKey) {
       loadData();
-      // SWR-style polling: re-fetch from chain every 5s to resync countdowns
-      const poller = setInterval(() => { loadData(true); }, 5000);
-      return () => clearInterval(poller);
+      const poller = window.setInterval(() => { loadData(true); }, 5000);
+      return () => window.clearInterval(poller);
     }
   }, [publicKey]);
 
@@ -104,7 +103,7 @@ export default function DashboardPage() {
     if (amount > balance) {
       setActionResult({
         success: false,
-        msg: `Insufficient balance. You have ${formatAmount(balance)} XLM.`,
+        msg: `Insufficient balance. You have ${formatAmount(balance)} CYC.`,
       });
       return;
     }
@@ -247,13 +246,13 @@ export default function DashboardPage() {
                       <div className="space-y-1">
                         <span className="text-text-secondary font-medium">Vault Balance:</span>
                         <p className="text-sm font-bold text-white font-mono">
-                          {formatAmount(sub.balance)} <span className="text-[10px] text-text-secondary">XLM</span>
+                          {formatAmount(sub.balance)} <span className="text-[10px] text-text-secondary">CYC</span>
                         </p>
                       </div>
                       <div className="space-y-1">
                         <span className="text-text-secondary font-medium">Cycle Charge:</span>
                         <p className="text-sm font-bold text-white font-mono">
-                          {sub.plan ? formatAmount(sub.plan.price) : "0"} <span className="text-[10px] text-text-secondary">XLM</span>
+                          {sub.plan ? formatAmount(sub.plan.price) : "0"} <span className="text-[10px] text-text-secondary">CYC</span>
                         </p>
                       </div>
                       <div className="space-y-1 col-span-2 pt-2 border-t border-border-subtle">
@@ -315,13 +314,13 @@ export default function DashboardPage() {
               Top Up Subscription Vault
             </h3>
             <p className="text-xs text-text-secondary mb-6">
-              Deposit more XLM into Vault Subscription #{activeSub.id} to prefund future billing pulls.
+              Deposit more CYC into Vault Subscription #{activeSub.id} to prefund future billing pulls.
             </p>
 
             <form onSubmit={handleTopUpSubmit} className="space-y-4">
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-text-secondary uppercase">
-                  Deposit Amount (XLM)
+                  Deposit Amount (CYC)
                 </label>
                 <input
                   type="number"
@@ -332,7 +331,7 @@ export default function DashboardPage() {
                   className="w-full bg-bg-primary border border-border-subtle text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-accent-primary"
                 />
                 <span className="text-[10px] text-text-secondary block">
-                  Wallet Balance: {formatAmount(balance)} XLM
+                  Wallet Balance: {formatAmount(balance)} CYC
                 </span>
               </div>
 

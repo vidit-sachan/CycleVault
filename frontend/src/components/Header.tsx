@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useWallet } from "@/context/WalletContext";
 import { shortenAddress, formatAmount } from "@/lib/utils";
+import { mintCycToken } from "@/lib/stellar";
 import { 
   Home, 
   Layers, 
@@ -13,12 +14,29 @@ import {
   Wallet, 
   LogOut, 
   Loader2, 
-  RefreshCw 
+  RefreshCw,
+  Coins
 } from "lucide-react";
 
 export default function Header() {
   const pathname = usePathname();
   const { publicKey, balance, loading, connect, disconnect, refreshBalance } = useWallet();
+  const [minting, setMinting] = React.useState(false);
+
+  const handleMintFaucet = async () => {
+    if (!publicKey) return;
+    setMinting(true);
+    try {
+      await mintCycToken(publicKey);
+      alert("Success! 1,000 CYC tokens have been minted to your wallet on Testnet.");
+      await refreshBalance();
+    } catch (e: any) {
+      console.error(e);
+      alert(e.message || "Faucet mint failed. Try again.");
+    } finally {
+      setMinting(false);
+    }
+  };
 
   const navItems = [
     { name: "Home", href: "/", icon: Home },
@@ -82,8 +100,17 @@ export default function Header() {
                   <span className="text-[10px] text-text-secondary uppercase font-semibold tracking-wider">
                     Balance
                   </span>
-                  <span className="text-sm font-mono font-bold text-accent-success">
-                    {formatAmount(balance)} <span className="text-xs text-text-secondary">XLM</span>
+                  <span className="text-sm font-mono font-bold text-accent-success flex items-center gap-1.5">
+                    {formatAmount(balance)} <span className="text-xs text-text-secondary">CYC</span>
+                    <button
+                      onClick={handleMintFaucet}
+                      disabled={minting}
+                      title="Mint 1,000 CYC Test Tokens"
+                      className="ml-1 px-2 py-0.5 text-[9px] font-sans font-bold bg-accent-primary/20 hover:bg-accent-primary hover:text-white text-accent-primary rounded transition-all border border-accent-primary/30 flex items-center gap-1 active:scale-95 disabled:opacity-50"
+                    >
+                      <Coins className="w-3 h-3" />
+                      <span>{minting ? "Minting..." : "Faucet"}</span>
+                    </button>
                   </span>
                 </div>
                 <div className="w-[1px] h-8 bg-border-subtle hidden sm:block" />
