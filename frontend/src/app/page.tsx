@@ -317,60 +317,18 @@ export default function Home() {
             ))}
           </ul>
         </div>
+        
         {/* Contract Diagram Platform illustration */}
         <div className="relative flex justify-center lg:justify-end items-center">
           <div className="absolute inset-0 radial-glow z-0" />
           
-          <div className="relative z-10 w-[380px] h-[260px] select-none">
-            {/* SVG Connecting Lines */}
-            <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 380 260">
-              <defs>
-                <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#dfa552" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#dfa552" stopOpacity="0.3" />
-                </linearGradient>
-              </defs>
-              {/* Merchant to Cube */}
-              <path d="M 110 47 L 150 47 L 170 95" stroke="url(#lineGrad)" strokeWidth="1.5" strokeDasharray="4 4" fill="none" />
-              {/* Subscriber to Cube */}
-              <path d="M 110 213 L 150 213 L 170 165" stroke="url(#lineGrad)" strokeWidth="1.5" strokeDasharray="4 4" fill="none" />
-              {/* Smart Contract to Cube */}
-              <path d="M 260 119 L 220 119" stroke="url(#lineGrad)" strokeWidth="1.5" strokeDasharray="4 4" fill="none" />
-              
-              {/* Small connection dots */}
-              <circle cx="110" cy="47" r="3" fill="#dfa552" />
-              <circle cx="110" cy="213" r="3" fill="#dfa552" />
-              <circle cx="260" cy="119" r="3" fill="#dfa552" />
-            </svg>
-
-            {/* Merchant Box */}
-            <div className="absolute top-[20px] left-[10px] z-10 bg-bg-primary/95 border border-border-subtle p-2 rounded-xl text-center w-[100px] shadow-lg animate-pulse">
-              <span className="text-[9px] text-text-secondary block font-bold uppercase tracking-wider">Role</span>
-              <span className="text-xs font-extrabold text-white">Merchant</span>
-            </div>
-
-            {/* Subscriber Box */}
-            <div className="absolute bottom-[20px] left-[10px] z-10 bg-bg-primary/95 border border-border-subtle p-2 rounded-xl text-center w-[100px] shadow-lg animate-pulse">
-              <span className="text-[9px] text-text-secondary block font-bold uppercase tracking-wider">Role</span>
-              <span className="text-xs font-extrabold text-white">Subscriber</span>
-            </div>
-
-            {/* Center 3D Cube */}
-            <div className="absolute top-[40px] left-[100px] w-[180px] h-[180px] z-10 hover:scale-105 transition-transform duration-500">
-              <Image
-                src="/contract_cube.png"
-                alt="3D Smart Contract Cube"
-                fill
-                className="object-contain"
-              />
-            </div>
-
-            {/* Smart Contract Box */}
-            <div className="absolute top-[90px] right-[10px] z-10 bg-bg-primary/95 border border-accent-primary/30 p-2.5 rounded-xl text-center w-[110px] shadow-lg shadow-accent-primary/5">
-              <span className="text-[9px] text-accent-primary block font-bold uppercase tracking-wider">Logic</span>
-              <span className="text-xs font-extrabold text-white">Smart Contract</span>
-              <span className="text-[8px] text-text-secondary block font-mono">Soroban</span>
-            </div>
+          <div className="relative z-10 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] hover:scale-105 transition-transform duration-500">
+            <Image
+              src="/contract_cube.png"
+              alt="Smart Contract Architecture Diagram"
+              fill
+              className="object-contain"
+            />
           </div>
         </div>
       </section>
