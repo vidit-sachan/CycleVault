@@ -193,7 +193,7 @@ export default function DashboardPage() {
           <p className="text-text-secondary">You do not have any active subscriptions yet.</p>
           <a
             href="/plans"
-            className="inline-block bg-gradient-to-r from-accent-primary to-accent-primary-hover text-white px-4 py-2 rounded-xl text-xs font-bold transition-all"
+            className="inline-block bg-gradient-to-r from-accent-primary to-accent-primary-hover text-black px-4 py-2 rounded-xl text-xs font-bold transition-all"
           >
             Browse & Subscribe
           </a>
@@ -377,7 +377,7 @@ export default function DashboardPage() {
                 <button
                   type="submit"
                   disabled={actionSubmitting}
-                  className="flex-1 bg-gradient-to-r from-accent-primary to-accent-primary-hover text-white py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center disabled:opacity-50"
+                  className="flex-1 bg-gradient-to-r from-accent-primary to-accent-primary-hover text-black py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center disabled:opacity-50"
                 >
                   {actionSubmitting ? (
                     <>

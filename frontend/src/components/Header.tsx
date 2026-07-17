@@ -111,7 +111,7 @@ export default function Header() {
                     console.error(e);
                   }
                 }}
-                className="flex items-center space-x-2 bg-gradient-to-r from-accent-primary to-accent-primary-hover text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-accent-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="flex items-center space-x-2 bg-gradient-to-r from-accent-primary to-accent-primary-hover text-black px-4 py-2.5 rounded-xl text-sm font-bold hover:shadow-lg hover:shadow-accent-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
                 <Wallet className="w-4 h-4" />
                 <span>Connect Wallet</span>

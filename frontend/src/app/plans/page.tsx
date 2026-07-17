@@ -214,7 +214,7 @@ export default function PlansPage() {
                 ) : plan.active ? (
                   <button
                     onClick={() => handleOpenSubscribe(plan)}
-                    className="w-full text-center bg-gradient-to-r from-accent-primary to-accent-primary-hover hover:scale-[1.02] text-white py-2.5 rounded-xl text-xs font-bold transition-all"
+                    className="w-full text-center bg-gradient-to-r from-accent-primary to-accent-primary-hover hover:scale-[1.02] text-black py-2.5 rounded-xl text-xs font-bold transition-all"
                   >
                     Prefund & Subscribe
                   </button>
@@ -320,7 +320,7 @@ export default function PlansPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex-1 bg-gradient-to-r from-accent-primary to-accent-primary-hover text-white py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center disabled:opacity-50"
+                  className="flex-1 bg-gradient-to-r from-accent-primary to-accent-primary-hover text-black py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center disabled:opacity-50"
                 >
                   {submitting ? (
                     <>
