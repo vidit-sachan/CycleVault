@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #030304;
+  --bg-surface: #0a0a0d;
+  --bg-surface-hover: #111114;
+  --border-subtle: #1c1c22;
+  --accent-primary: #7c7ce4;
+  --accent-primary-hover: #9090e4;
+  --accent-success: #4caf7a;
+  --accent-warning: #e8b34c;
+  --accent-danger: #e8586c;
+  --text-primary: #ffffff;
+  --text-secondary: #9a9aa5;
+}
+
+body {
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.radial-glow {
+  background: radial-gradient(circle, rgba(124, 124, 228, 0.15) 0%, rgba(3, 3, 4, 0) 70%);
+  animation: pulseGlow 8s ease-in-out infinite;
+}
