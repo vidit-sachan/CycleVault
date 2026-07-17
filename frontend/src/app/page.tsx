@@ -322,7 +322,7 @@ export default function Home() {
         <div className="relative flex justify-center lg:justify-end items-center">
           <div className="absolute inset-0 radial-glow z-0" />
           
-          <div className="relative z-10 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] hover:scale-105 transition-transform duration-500">
+          <div className="relative z-10 w-[240px] h-[250px] sm:w-[320px] sm:h-[335px] hover:scale-105 transition-transform duration-500">
             <Image
               src="/contract_cube.png"
               alt="Smart Contract Architecture Diagram"
