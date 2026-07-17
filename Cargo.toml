@@ -1,0 +1,15 @@
+[workspace]
+resolver = "2"
+members = [
+    "contracts/merchant-registry",
+    "contracts/cycle-vault",
+    "contracts/cyc-token",
+]
+
+[profile.release]
+opt-level = "z"
+overflow-checks = true
+debug = false
+panic = "abort"
+lto = true
+codegen-units = 1
