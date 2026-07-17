@@ -30,12 +30,12 @@ export default function Footer() {
             Cycle Vault Contract
           </a>
           <a
-            href={`https://stellar.expert/explorer/testnet/contract/${deployments.token_id}`}
+            href={`https://stellar.expert/explorer/testnet/contract/CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC`}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-accent-primary transition-colors"
           >
-            CYC Token Contract
+            XLM Asset Contract
           </a>
         </div>
 

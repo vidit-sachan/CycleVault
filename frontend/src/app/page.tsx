@@ -17,7 +17,7 @@ export default function Home() {
 
   const stats = [
     { label: "Active Subscriptions", value: "320+" },
-    { label: "Total Prefunded TVL", value: "452.9K CYC" },
+    { label: "Total Prefunded TVL", value: "452.9K XLM" },
     { label: "Cycle Charges Processed", value: "8,412" },
     { label: "Merchant Plans Registered", value: "48" },
   ];
@@ -30,7 +30,7 @@ export default function Home() {
     },
     {
       title: "2. Prefund & Subscribe",
-      desc: "Subscribers prefund a dedicated cycle vault with CYC tokens to authorize recurring pulls.",
+      desc: "Subscribers prefund a dedicated cycle vault with XLM tokens to authorize recurring pulls.",
       icon: UserCheck,
     },
     {
@@ -166,10 +166,10 @@ export default function Home() {
             <span className="text-[10px] text-text-secondary font-bold uppercase tracking-wider block">
               Demo Token Faucet
             </span>
-            <span className="text-xl font-bold text-white">CYC Token Asset</span>
+            <span className="text-xl font-bold text-white">XLM Native Asset</span>
           </div>
           <p className="text-xs text-text-secondary text-center leading-normal">
-            Use the pre-configured custom CYC token contract to test subscribers and merchants. Use the Faucet button in the header to mint free CYC tokens.
+            Use the pre-configured Stellar Asset Contract (SAC) to test subscribers and merchants using Freighter. XLM is funded by default.
           </p>
           <Link
             href="/plans"

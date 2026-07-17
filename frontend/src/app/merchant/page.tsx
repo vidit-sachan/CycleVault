@@ -195,7 +195,7 @@ export default function MerchantPage() {
 
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-text-secondary uppercase">
-                    Fee (CYC)
+                    Fee (XLM)
                   </label>
                   <input
                     type="number"
@@ -285,7 +285,7 @@ export default function MerchantPage() {
                     <div key={index} className="p-3 bg-bg-primary/50 border border-border-subtle rounded-xl text-[10px] space-y-1">
                       <div className="flex justify-between font-bold text-white">
                         <span>Sub #{item.subId} Charged</span>
-                        <span className="text-accent-success">+{formatAmount(item.amount)} CYC</span>
+                        <span className="text-accent-success">+{formatAmount(item.amount)} XLM</span>
                       </div>
                       <p className="text-text-secondary">From: {shortenAddress(item.subscriber)}</p>
                       <div className="flex justify-between items-center text-[9px] text-text-secondary pt-1">
@@ -341,7 +341,7 @@ export default function MerchantPage() {
                         </span>
                         <h4 className="text-sm font-bold text-white">{plan.name}</h4>
                         <p className="text-xs font-mono text-accent-primary font-bold">
-                          {formatAmount(plan.price)} CYC <span className="text-text-secondary font-sans font-normal">/ {formatCountdown(Number(plan.interval))}</span>
+                          {formatAmount(plan.price)} XLM <span className="text-text-secondary font-sans font-normal">/ {formatCountdown(Number(plan.interval))}</span>
                         </p>
                       </div>
                       <div className="flex flex-col items-end space-y-1.5">
@@ -388,7 +388,7 @@ export default function MerchantPage() {
                               {sub.plan ? sub.plan.name : `Plan #${sub.plan_id}`}
                             </td>
                             <td className="py-3.5 pr-2 font-mono font-bold text-white">
-                              {formatAmount(sub.balance)} <span className="text-[10px] text-text-secondary font-normal">CYC</span>
+                              {formatAmount(sub.balance)} <span className="text-[10px] text-text-secondary font-normal">XLM</span>
                             </td>
                             <td className="py-3.5 pr-2">
                               <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${
