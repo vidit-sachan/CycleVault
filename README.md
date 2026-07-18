@@ -132,6 +132,9 @@ The application handles various runtime states with explicit, friendly UI prompt
 ### 1. Main Landing Page (Obsidian-Gold Tech Theme)
 ![Landing Page](screenshots/desktop_image.png)
 
+### 2. Mobile Responsive UI Layout
+![Mobile Layout](screenshots/mobile.png)
+
 ---
 
 ## Setup Instructions
