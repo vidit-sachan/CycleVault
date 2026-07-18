@@ -100,7 +100,7 @@ jobs:
         run: npm --prefix frontend run lint
 
       - name: Run TypeScript typecheck
-        run: npx --prefix frontend tsc --noEmit
+        run: npm --prefix frontend run typecheck
 
   build-frontend:
     name: Build Next.js frontend
