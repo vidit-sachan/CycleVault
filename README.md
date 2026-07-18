@@ -135,6 +135,9 @@ The application handles various runtime states with explicit, friendly UI prompt
 ### 2. Mobile Responsive UI Layout
 ![Mobile Layout](screenshots/mobile.png)
 
+### 3. Automated CI/CD Pipeline
+![CI/CD Pipeline](screenshots/cicd-pipeline.png)
+
 ---
 
 ## Setup Instructions
