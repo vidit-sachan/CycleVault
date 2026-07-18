@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 
 export default function PlansPage() {
-  const { publicKey, balance, refreshBalance } = useWallet();
+  const { publicKey, balance, refreshBalance, loading: walletLoading } = useWallet();
   const [plans, setPlans] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [customMerchant, setCustomMerchant] = useState("");
@@ -56,8 +56,9 @@ export default function PlansPage() {
   }, [publicKey, hasAutoSwitched]);
 
   useEffect(() => {
+    if (walletLoading) return;
     loadPlans(currentMerchant);
-  }, [currentMerchant]);
+  }, [currentMerchant, walletLoading]);
 
   const handleSearchMerchant = (e: React.FormEvent) => {
     e.preventDefault();
@@ -163,13 +164,15 @@ export default function PlansPage() {
       </div>
 
       {/* Showing results for label */}
-      <div className="flex items-center space-x-2 text-xs text-text-secondary bg-bg-surface border border-border-subtle px-4 py-2 rounded-xl w-fit font-mono">
-        <Compass className="w-3.5 h-3.5 text-accent-primary" />
-        <span>Merchant: {currentMerchant === deployments.merchant ? "Demo Merchant" : currentMerchant}</span>
-      </div>
+      {!walletLoading && (
+        <div className="flex items-center space-x-2 text-xs text-text-secondary bg-bg-surface border border-border-subtle px-4 py-2 rounded-xl w-fit font-mono">
+          <Compass className="w-3.5 h-3.5 text-accent-primary" />
+          <span>Merchant: {currentMerchant === deployments.merchant ? "Demo Merchant" : currentMerchant}</span>
+        </div>
+      )}
 
       {/* Plans Grid */}
-      {loading ? (
+      {loading || walletLoading ? (
         <div className="flex flex-col items-center justify-center py-20 space-y-4">
           <Loader2 className="w-8 h-8 animate-spin text-accent-primary" />
           <span className="text-sm text-text-secondary">Querying merchant registry on-chain...</span>
