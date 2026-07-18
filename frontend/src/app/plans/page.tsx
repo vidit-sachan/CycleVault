@@ -93,6 +93,10 @@ export default function PlansPage() {
         hash: txHash,
       });
       refreshBalance();
+      // Auto-close modal after 3 seconds
+      setTimeout(() => {
+        setSelectedPlan(null);
+      }, 3000);
     } catch (err: any) {
       console.error(err);
       setTxResult({
@@ -309,28 +313,40 @@ export default function PlansPage() {
               )}
 
               <div className="flex space-x-3 pt-4">
-                <button
-                  type="button"
-                  onClick={() => setSelectedPlan(null)}
-                  disabled={submitting}
-                  className="flex-1 bg-bg-primary border border-border-subtle hover:bg-bg-surface text-white py-2.5 rounded-xl text-xs font-bold transition-all disabled:opacity-50"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="flex-1 bg-gradient-to-r from-accent-primary to-accent-primary-hover text-black py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center disabled:opacity-50"
-                >
-                  {submitting ? (
-                    <>
-                      <Loader2 className="w-4.5 h-4.5 animate-spin mr-1.5" />
-                      <span>Signing...</span>
-                    </>
-                  ) : (
-                    <span>Prefund & Subscribe</span>
-                  )}
-                </button>
+                {txResult?.success ? (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedPlan(null)}
+                    className="w-full text-center bg-gradient-to-r from-accent-primary to-accent-primary-hover text-black py-2.5 rounded-xl text-xs font-bold transition-all"
+                  >
+                    Close
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPlan(null)}
+                      disabled={submitting}
+                      className="flex-1 bg-bg-primary border border-border-subtle hover:bg-bg-surface text-white py-2.5 rounded-xl text-xs font-bold transition-all disabled:opacity-50"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="flex-1 bg-gradient-to-r from-accent-primary to-accent-primary-hover text-black py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center disabled:opacity-50"
+                    >
+                      {submitting ? (
+                        <>
+                          <Loader2 className="w-4.5 h-4.5 animate-spin mr-1.5" />
+                          <span>Signing...</span>
+                        </>
+                      ) : (
+                        <span>Prefund & Subscribe</span>
+                      )}
+                    </button>
+                  </>
+                )}
               </div>
             </form>
           </div>
