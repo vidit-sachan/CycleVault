@@ -1,12 +1,12 @@
 # CycleVault
 
-![CI/CD Pipeline](https://github.com/vidit/CycleVault/actions/workflows/ci.yml/badge.svg)
+![CI/CD Pipeline](https://github.com/vidit-sachan/CycleVault/actions/workflows/ci.yml/badge.svg)
 ![Stellar Testnet](https://img.shields.io/badge/Stellar-Testnet-blue.svg)
 ![Soroban](https://img.shields.io/badge/Soroban-Protocol_22+-orange.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-14-black.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-**Live Demo:** [PENDING — Deploy to Cloudflare Pages/Vercel]  
+**Live Demo:** [https://cyclevault-5nu.pages.dev/](https://cyclevault-5nu.pages.dev/)  
 **Demo Video (1–2 min):** [CycleVault Demo GIF](screenshots/demo_video.gif)
 
 ---
