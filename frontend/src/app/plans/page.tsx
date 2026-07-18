@@ -119,22 +119,36 @@ export default function PlansPage() {
           </p>
         </div>
 
-        <form onSubmit={handleSearchMerchant} className="flex items-center space-x-2">
-          <input
-            type="text"
-            placeholder="Search Merchant Address..."
-            value={customMerchant}
-            onChange={(e) => setCustomMerchant(e.target.value)}
-            className="bg-bg-surface border border-border-subtle text-white rounded-xl px-4 py-2.5 text-xs font-mono w-64 focus:outline-none focus:border-accent-primary"
-          />
-          <button
-            type="submit"
-            disabled={customMerchant.length !== 56}
-            className="bg-bg-surface border border-border-subtle hover:bg-bg-surface-hover text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all disabled:opacity-50"
-          >
-            Query
-          </button>
-        </form>
+        <div className="flex flex-col items-end">
+          <form onSubmit={handleSearchMerchant} className="flex items-center space-x-2">
+            <input
+              type="text"
+              placeholder="Search Merchant Address..."
+              value={customMerchant}
+              onChange={(e) => setCustomMerchant(e.target.value)}
+              className="bg-bg-surface border border-border-subtle text-white rounded-xl px-4 py-2.5 text-xs font-mono w-64 focus:outline-none focus:border-accent-primary"
+            />
+            <button
+              type="submit"
+              disabled={customMerchant.length !== 56}
+              className="bg-bg-surface border border-border-subtle hover:bg-bg-surface-hover text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all disabled:opacity-50"
+            >
+              Query
+            </button>
+          </form>
+          {publicKey && (
+            <button
+              type="button"
+              onClick={() => {
+                setCustomMerchant(publicKey);
+                setCurrentMerchant(publicKey);
+              }}
+              className="text-[10px] text-accent-primary hover:underline font-semibold mt-1.5 mr-1"
+            >
+              Query My Wallet Address
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Showing results for label */}
