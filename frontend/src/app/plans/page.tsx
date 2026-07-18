@@ -44,6 +44,17 @@ export default function PlansPage() {
     }
   };
 
+  // Auto-switch to connected wallet address on load/connect
+  const [hasAutoSwitched, setHasAutoSwitched] = useState(false);
+
+  useEffect(() => {
+    if (publicKey && !hasAutoSwitched) {
+      setCurrentMerchant(publicKey);
+      setCustomMerchant(publicKey);
+      setHasAutoSwitched(true);
+    }
+  }, [publicKey, hasAutoSwitched]);
+
   useEffect(() => {
     loadPlans(currentMerchant);
   }, [currentMerchant]);
