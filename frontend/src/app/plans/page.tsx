@@ -22,9 +22,9 @@ import {
 export default function PlansPage() {
   const { publicKey, balance, refreshBalance, loading: walletLoading } = useWallet();
   const [plans, setPlans] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [customMerchant, setCustomMerchant] = useState("");
-  const [currentMerchant, setCurrentMerchant] = useState(deployments.merchant);
+  const [currentMerchant, setCurrentMerchant] = useState("");
 
   // Prefund Form State
   const [selectedPlan, setSelectedPlan] = useState<any | null>(null);
@@ -33,6 +33,11 @@ export default function PlansPage() {
   const [txResult, setTxResult] = useState<{ success: boolean; msg: string; hash?: string } | null>(null);
 
   const loadPlans = async (merchantAddr: string) => {
+    if (!merchantAddr) {
+      setPlans([]);
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const fetchedPlans = await fetchMerchantPlans(merchantAddr);
@@ -164,10 +169,10 @@ export default function PlansPage() {
       </div>
 
       {/* Showing results for label */}
-      {!walletLoading && (
+      {!walletLoading && currentMerchant && (
         <div className="flex items-center space-x-2 text-xs text-text-secondary bg-bg-surface border border-border-subtle px-4 py-2 rounded-xl w-fit font-mono">
           <Compass className="w-3.5 h-3.5 text-accent-primary" />
-          <span>Merchant: {currentMerchant === deployments.merchant ? "Demo Merchant" : currentMerchant}</span>
+          <span>Merchant: {currentMerchant}</span>
         </div>
       )}
 
@@ -179,17 +184,10 @@ export default function PlansPage() {
         </div>
       ) : plans.length === 0 ? (
         <div className="text-center py-20 border border-dashed border-border-subtle rounded-2xl bg-bg-surface space-y-4">
-          <p className="text-text-secondary">No active plans found for this merchant.</p>
-          {currentMerchant !== deployments.merchant && (
-            <button
-              onClick={() => {
-                setCurrentMerchant(deployments.merchant);
-                setCustomMerchant("");
-              }}
-              className="text-accent-primary text-xs font-semibold hover:underline"
-            >
-              Reset to Demo Merchant
-            </button>
+          {currentMerchant ? (
+            <p className="text-text-secondary">No active plans found for this merchant.</p>
+          ) : (
+            <p className="text-text-secondary font-medium">Please connect your wallet or search for a merchant address to view plans.</p>
           )}
         </div>
       ) : (
