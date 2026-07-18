@@ -1,5 +1,7 @@
 #![no_std]
-use soroban_sdk::{contract, contractimpl, contracttype, Address, Env, String, Symbol, symbol_short};
+use soroban_sdk::{
+    contract, contractimpl, contracttype, symbol_short, Address, Env, String, Symbol,
+};
 
 #[contracttype]
 #[derive(Clone)]
@@ -54,14 +56,16 @@ impl TokenContract {
 
         let to_balance = Self::balance(env.clone(), to.clone());
 
-        env.storage().persistent().set(&(DataKey::Balance, from.clone()), &(from_balance - amount));
-        env.storage().persistent().set(&(DataKey::Balance, to.clone()), &(to_balance + amount));
+        env.storage()
+            .persistent()
+            .set(&(DataKey::Balance, from.clone()), &(from_balance - amount));
+        env.storage()
+            .persistent()
+            .set(&(DataKey::Balance, to.clone()), &(to_balance + amount));
 
         // Emit event
-        env.events().publish(
-            (symbol_short!("transfer"), from, to),
-            amount
-        );
+        env.events()
+            .publish((symbol_short!("transfer"), from, to), amount);
     }
 
     pub fn transfer_from(env: Env, spender: Address, from: Address, to: Address, amount: i128) {
@@ -72,7 +76,11 @@ impl TokenContract {
 
         let allowance_key = (DataKey::Allowance, from.clone(), spender.clone());
 
-        if let Some(allowance) = env.storage().persistent().get::<_, AllowanceValue>(&allowance_key) {
+        if let Some(allowance) = env
+            .storage()
+            .persistent()
+            .get::<_, AllowanceValue>(&allowance_key)
+        {
             if env.ledger().sequence() > allowance.expiration_ledger {
                 panic!("allowance expired");
             }
@@ -83,7 +91,9 @@ impl TokenContract {
                 amount: allowance.amount - amount,
                 expiration_ledger: allowance.expiration_ledger,
             };
-            env.storage().persistent().set(&allowance_key, &new_allowance);
+            env.storage()
+                .persistent()
+                .set(&allowance_key, &new_allowance);
         } else {
             panic!("no allowance");
         }
@@ -95,17 +105,25 @@ impl TokenContract {
 
         let to_balance = Self::balance(env.clone(), to.clone());
 
-        env.storage().persistent().set(&(DataKey::Balance, from.clone()), &(from_balance - amount));
-        env.storage().persistent().set(&(DataKey::Balance, to.clone()), &(to_balance + amount));
+        env.storage()
+            .persistent()
+            .set(&(DataKey::Balance, from.clone()), &(from_balance - amount));
+        env.storage()
+            .persistent()
+            .set(&(DataKey::Balance, to.clone()), &(to_balance + amount));
 
         // Emit event
-        env.events().publish(
-            (symbol_short!("transfer"), from, to),
-            amount
-        );
+        env.events()
+            .publish((symbol_short!("transfer"), from, to), amount);
     }
 
-    pub fn approve(env: Env, from: Address, spender: Address, amount: i128, expiration_ledger: u32) {
+    pub fn approve(
+        env: Env,
+        from: Address,
+        spender: Address,
+        amount: i128,
+        expiration_ledger: u32,
+    ) {
         if amount < 0 {
             panic!("negative amount not allowed");
         }
@@ -121,10 +139,8 @@ impl TokenContract {
         env.storage().persistent().set(&allowance_key, &val);
 
         // Emit event
-        env.events().publish(
-            (Symbol::new(&env, "approve"), from, spender),
-            amount
-        );
+        env.events()
+            .publish((Symbol::new(&env, "approve"), from, spender), amount);
     }
 
     pub fn mint(env: Env, to: Address, amount: i128) {
@@ -135,13 +151,12 @@ impl TokenContract {
         admin.require_auth();
 
         let to_balance = Self::balance(env.clone(), to.clone());
-        env.storage().persistent().set(&(DataKey::Balance, to.clone()), &(to_balance + amount));
+        env.storage()
+            .persistent()
+            .set(&(DataKey::Balance, to.clone()), &(to_balance + amount));
 
         // Emit event
-        env.events().publish(
-            (symbol_short!("mint"), to),
-            amount
-        );
+        env.events().publish((symbol_short!("mint"), to), amount);
     }
 
     pub fn burn(env: Env, from: Address, amount: i128) {
@@ -155,12 +170,11 @@ impl TokenContract {
             panic!("insufficient balance");
         }
 
-        env.storage().persistent().set(&(DataKey::Balance, from.clone()), &(from_balance - amount));
+        env.storage()
+            .persistent()
+            .set(&(DataKey::Balance, from.clone()), &(from_balance - amount));
 
         // Emit event
-        env.events().publish(
-            (symbol_short!("burn"), from),
-            amount
-        );
+        env.events().publish((symbol_short!("burn"), from), amount);
     }
 }

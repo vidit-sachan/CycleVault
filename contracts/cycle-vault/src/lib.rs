@@ -1,6 +1,7 @@
 #![no_std]
 use soroban_sdk::{
-    contract, contracterror, contractimpl, contracttype, panic_with_error, Address, Env, Symbol, Vec, symbol_short, IntoVal
+    contract, contracterror, contractimpl, contracttype, panic_with_error, symbol_short, Address,
+    Env, IntoVal, Symbol, Vec,
 };
 
 #[contracttype]
@@ -146,9 +147,18 @@ impl CycleVaultContract {
 
         // Pull tokens from subscriber to vault contract
         let token = TokenClient::new(&env, &plan.token);
-        token.transfer(&subscriber, &env.current_contract_address(), &prefund_amount);
+        token.transfer(
+            &subscriber,
+            &env.current_contract_address(),
+            &prefund_amount,
+        );
 
-        let sub_id: u64 = env.storage().instance().get(&DataKey::SubCounter).unwrap_or(0) + 1;
+        let sub_id: u64 = env
+            .storage()
+            .instance()
+            .get(&DataKey::SubCounter)
+            .unwrap_or(0)
+            + 1;
         env.storage().instance().set(&DataKey::SubCounter, &sub_id);
 
         let now = env.ledger().timestamp();
@@ -162,19 +172,31 @@ impl CycleVaultContract {
             status: SubStatus::Active,
         };
 
-        env.storage().persistent().set(&(DataKey::Subscription, sub_id), &sub_info);
+        env.storage()
+            .persistent()
+            .set(&(DataKey::Subscription, sub_id), &sub_info);
 
         // Map user subscriptions
         let user_key = (DataKey::UserSubs, subscriber.clone());
-        let mut user_subs: Vec<u64> = env.storage().persistent().get(&user_key).unwrap_or_else(|| Vec::new(&env));
+        let mut user_subs: Vec<u64> = env
+            .storage()
+            .persistent()
+            .get(&user_key)
+            .unwrap_or_else(|| Vec::new(&env));
         user_subs.push_back(sub_id);
         env.storage().persistent().set(&user_key, &user_subs);
 
         // Map merchant subscriptions
         let merchant_key = (DataKey::MerchantSubs, plan.merchant.clone());
-        let mut merchant_subs: Vec<u64> = env.storage().persistent().get(&merchant_key).unwrap_or_else(|| Vec::new(&env));
+        let mut merchant_subs: Vec<u64> = env
+            .storage()
+            .persistent()
+            .get(&merchant_key)
+            .unwrap_or_else(|| Vec::new(&env));
         merchant_subs.push_back(sub_id);
-        env.storage().persistent().set(&merchant_key, &merchant_subs);
+        env.storage()
+            .persistent()
+            .set(&merchant_key, &merchant_subs);
 
         // Publish event
         env.events().publish(
@@ -192,9 +214,10 @@ impl CycleVaultContract {
         }
 
         let sub_key = (DataKey::Subscription, sub_id);
-        let mut sub: SubscriptionInfo = env.storage().persistent().get(&sub_key).unwrap_or_else(|| {
-            panic_with_error!(&env, Error::SubscriptionNotFound);
-        });
+        let mut sub: SubscriptionInfo =
+            env.storage().persistent().get(&sub_key).unwrap_or_else(|| {
+                panic_with_error!(&env, Error::SubscriptionNotFound);
+            });
 
         if sub.subscriber != subscriber {
             panic_with_error!(&env, Error::NotSubscriber);
@@ -214,19 +237,18 @@ impl CycleVaultContract {
         sub.balance += amount;
         env.storage().persistent().set(&sub_key, &sub);
 
-        env.events().publish(
-            (Symbol::new(&env, "top_up_processed"), sub_id),
-            amount,
-        );
+        env.events()
+            .publish((Symbol::new(&env, "top_up_processed"), sub_id), amount);
     }
 
     pub fn cancel(env: Env, subscriber: Address, sub_id: u64) {
         subscriber.require_auth();
 
         let sub_key = (DataKey::Subscription, sub_id);
-        let mut sub: SubscriptionInfo = env.storage().persistent().get(&sub_key).unwrap_or_else(|| {
-            panic_with_error!(&env, Error::SubscriptionNotFound);
-        });
+        let mut sub: SubscriptionInfo =
+            env.storage().persistent().get(&sub_key).unwrap_or_else(|| {
+                panic_with_error!(&env, Error::SubscriptionNotFound);
+            });
 
         if sub.subscriber != subscriber {
             panic_with_error!(&env, Error::NotSubscriber);
@@ -260,9 +282,10 @@ impl CycleVaultContract {
         caller.require_auth();
 
         let sub_key = (DataKey::Subscription, sub_id);
-        let mut sub: SubscriptionInfo = env.storage().persistent().get(&sub_key).unwrap_or_else(|| {
-            panic_with_error!(&env, Error::SubscriptionNotFound);
-        });
+        let mut sub: SubscriptionInfo =
+            env.storage().persistent().get(&sub_key).unwrap_or_else(|| {
+                panic_with_error!(&env, Error::SubscriptionNotFound);
+            });
 
         if sub.status == SubStatus::Cancelled {
             panic_with_error!(&env, Error::SubscriptionCancelled);
@@ -354,12 +377,22 @@ impl CycleVaultContract {
 
     pub fn list_subscriptions_for(env: Env, subscriber: Address) -> Vec<u64> {
         let key = (DataKey::UserSubs, subscriber);
-        env.storage().persistent().get(&key).unwrap_or_else(|| Vec::new(&env))
+        env.storage()
+            .persistent()
+            .get(&key)
+            .unwrap_or_else(|| Vec::new(&env))
     }
 
-    pub fn list_subscriptions_for_merchant(env: Env, _registry: Address, merchant: Address) -> Vec<u64> {
+    pub fn list_subscriptions_for_merchant(
+        env: Env,
+        _registry: Address,
+        merchant: Address,
+    ) -> Vec<u64> {
         let key = (DataKey::MerchantSubs, merchant);
-        env.storage().persistent().get(&key).unwrap_or_else(|| Vec::new(&env))
+        env.storage()
+            .persistent()
+            .get(&key)
+            .unwrap_or_else(|| Vec::new(&env))
     }
 }
 

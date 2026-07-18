@@ -1,7 +1,9 @@
 #![cfg(test)]
 use super::*;
 use soroban_sdk::{
-    Env, Address, testutils::{Address as _, Ledger}, String, Symbol, symbol_short, vec
+    symbol_short,
+    testutils::{Address as _, Ledger},
+    vec, Address, Env, String, Symbol,
 };
 
 // ============================================================
@@ -154,9 +156,27 @@ fn test_04_list_plans_for_merchant() {
     let client = merchant_registry::MerchantRegistryContractClient::new(&env, &registry_id);
     client.initialize(&admin);
 
-    let p1 = client.create_plan(&merchant, &Symbol::new(&env, "planA"), &token_addr, &100i128, &60u64);
-    let p2 = client.create_plan(&merchant, &Symbol::new(&env, "planB"), &token_addr, &200i128, &120u64);
-    let _p3 = client.create_plan(&other_merchant, &Symbol::new(&env, "other"), &token_addr, &300i128, &30u64);
+    let p1 = client.create_plan(
+        &merchant,
+        &Symbol::new(&env, "planA"),
+        &token_addr,
+        &100i128,
+        &60u64,
+    );
+    let p2 = client.create_plan(
+        &merchant,
+        &Symbol::new(&env, "planB"),
+        &token_addr,
+        &200i128,
+        &120u64,
+    );
+    let _p3 = client.create_plan(
+        &other_merchant,
+        &Symbol::new(&env, "other"),
+        &token_addr,
+        &300i128,
+        &30u64,
+    );
 
     let plans = client.list_plans_for_merchant(&merchant);
     assert_eq!(plans.len(), 2);
@@ -171,7 +191,17 @@ fn test_04_list_plans_for_merchant() {
 
 #[test]
 fn test_05_subscribe_pulls_correct_prefund_amount() {
-    let (_env, _admin, merchant, subscriber, token_id, token_client, registry_client, vault_id, vault_client) = setup_env();
+    let (
+        _env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        token_client,
+        registry_client,
+        vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -193,7 +223,17 @@ fn test_05_subscribe_pulls_correct_prefund_amount() {
 
 #[test]
 fn test_06_subscribe_against_inactive_plan_fails() {
-    let (_env, _admin, merchant, subscriber, token_id, _token_client, registry_client, _vault_id, vault_client) = setup_env();
+    let (
+        _env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        _token_client,
+        registry_client,
+        _vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -210,7 +250,17 @@ fn test_06_subscribe_against_inactive_plan_fails() {
 
 #[test]
 fn test_07_subscribe_with_insufficient_prefund_fails() {
-    let (_env, _admin, merchant, subscriber, token_id, _token_client, registry_client, _vault_id, vault_client) = setup_env();
+    let (
+        _env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        _token_client,
+        registry_client,
+        _vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -229,7 +279,17 @@ fn test_07_subscribe_with_insufficient_prefund_fails() {
 
 #[test]
 fn test_08_charge_before_interval_elapses_fails() {
-    let (_env, _admin, merchant, subscriber, token_id, _token_client, registry_client, _vault_id, vault_client) = setup_env();
+    let (
+        _env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        _token_client,
+        registry_client,
+        _vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -248,7 +308,17 @@ fn test_08_charge_before_interval_elapses_fails() {
 
 #[test]
 fn test_09_charge_succeeds_after_interval() {
-    let (env, _admin, merchant, subscriber, token_id, token_client, registry_client, vault_id, vault_client) = setup_env();
+    let (
+        env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        token_client,
+        registry_client,
+        vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -274,7 +344,17 @@ fn test_09_charge_succeeds_after_interval() {
 
 #[test]
 fn test_10_charge_drains_vault_correctly_across_multiple_cycles() {
-    let (env, _admin, merchant, subscriber, token_id, token_client, registry_client, vault_id, vault_client) = setup_env();
+    let (
+        env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        token_client,
+        registry_client,
+        vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -312,7 +392,17 @@ fn test_10_charge_drains_vault_correctly_across_multiple_cycles() {
 
 #[test]
 fn test_11_charge_on_cancelled_subscription_fails() {
-    let (env, _admin, merchant, subscriber, token_id, _token_client, registry_client, _vault_id, vault_client) = setup_env();
+    let (
+        env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        _token_client,
+        registry_client,
+        _vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -331,7 +421,17 @@ fn test_11_charge_on_cancelled_subscription_fails() {
 
 #[test]
 fn test_12_charge_on_insufficient_balance_fails() {
-    let (env, _admin, merchant, subscriber, token_id, _token_client, registry_client, _vault_id, vault_client) = setup_env();
+    let (
+        env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        _token_client,
+        registry_client,
+        _vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -355,7 +455,17 @@ fn test_12_charge_on_insufficient_balance_fails() {
 
 #[test]
 fn test_13_charge_on_deactivated_plan_fails() {
-    let (env, _admin, merchant, subscriber, token_id, _token_client, registry_client, _vault_id, vault_client) = setup_env();
+    let (
+        env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        _token_client,
+        registry_client,
+        _vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -378,7 +488,17 @@ fn test_13_charge_on_deactivated_plan_fails() {
 
 #[test]
 fn test_14_cancel_refunds_exact_remaining_balance() {
-    let (_env, _admin, merchant, subscriber, token_id, token_client, registry_client, _vault_id, vault_client) = setup_env();
+    let (
+        _env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        token_client,
+        registry_client,
+        _vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -399,7 +519,17 @@ fn test_14_cancel_refunds_exact_remaining_balance() {
 
 #[test]
 fn test_15_cancel_by_non_subscriber_fails() {
-    let (_env, _admin, merchant, subscriber, token_id, _token_client, registry_client, _vault_id, vault_client) = setup_env();
+    let (
+        _env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        _token_client,
+        registry_client,
+        _vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -422,7 +552,17 @@ fn test_15_cancel_by_non_subscriber_fails() {
 
 #[test]
 fn test_16_top_up_increases_balance_without_resetting_last_charge() {
-    let (env, _admin, merchant, subscriber, token_id, token_client, registry_client, vault_id, vault_client) = setup_env();
+    let (
+        env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        token_client,
+        registry_client,
+        vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -448,7 +588,17 @@ fn test_16_top_up_increases_balance_without_resetting_last_charge() {
 
 #[test]
 fn test_17_top_up_cancelled_subscription_fails() {
-    let (_env, _admin, merchant, subscriber, token_id, _token_client, registry_client, _vault_id, vault_client) = setup_env();
+    let (
+        _env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        _token_client,
+        registry_client,
+        _vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -468,7 +618,17 @@ fn test_17_top_up_cancelled_subscription_fails() {
 
 #[test]
 fn test_18_next_charge_in_returns_correct_values() {
-    let (env, _admin, merchant, subscriber, token_id, _token_client, registry_client, _vault_id, vault_client) = setup_env();
+    let (
+        env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        _token_client,
+        registry_client,
+        _vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -499,7 +659,17 @@ fn test_18_next_charge_in_returns_correct_values() {
 
 #[test]
 fn test_19_price_change_picked_up_on_next_charge() {
-    let (env, _admin, merchant, subscriber, token_id, token_client, registry_client, _vault_id, vault_client) = setup_env();
+    let (
+        env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        token_client,
+        registry_client,
+        _vault_id,
+        vault_client,
+    ) = setup_env();
 
     let plan_id = registry_client.create_plan(
         &merchant,
@@ -527,7 +697,17 @@ fn test_19_price_change_picked_up_on_next_charge() {
 
 #[test]
 fn test_20_list_subscriptions_for_subscriber_and_merchant() {
-    let (env, _admin, merchant, subscriber, token_id, _token_client, registry_client, _vault_id, vault_client) = setup_env();
+    let (
+        env,
+        _admin,
+        merchant,
+        subscriber,
+        token_id,
+        _token_client,
+        registry_client,
+        _vault_id,
+        vault_client,
+    ) = setup_env();
 
     let p1 = registry_client.create_plan(
         &merchant,
@@ -561,4 +741,3 @@ fn test_20_list_subscriptions_for_subscriber_and_merchant() {
     let other = Address::generate(&env);
     assert_eq!(vault_client.list_subscriptions_for(&other).len(), 0);
 }
-
