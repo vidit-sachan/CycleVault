@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useWallet } from "@/context/WalletContext";
 import {
   ArrowRight,
@@ -106,29 +105,26 @@ export default function Home() {
   return (
     <div className="space-y-24 py-8">
       {/* 1. HERO SECTION */}
-      <section className="flex flex-col lg:flex-row items-center justify-between gap-12 max-w-6xl mx-auto">
-        <div className="space-y-6 lg:max-w-xl text-left">
+      <section className="max-w-4xl mx-auto text-center py-6">
+        <div className="space-y-6 flex flex-col items-center justify-center">
           <div className="inline-flex items-center space-x-2 bg-accent-primary/10 border border-accent-primary/20 px-3 py-1 rounded-full text-[10px] font-bold text-accent-primary uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5 text-accent-primary" />
             <span>Built on Stellar Soroban</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            Automate Recurring <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-primary to-accent-primary-hover">
-              Payments & Subscriptions
-            </span>
+            Automate Recurring Payments & Subscriptions
           </h1>
 
           <p className="text-sm font-semibold tracking-wider text-accent-primary/80 uppercase">
             Secure • Trustless • Decentralized
           </p>
 
-          <p className="text-base text-text-secondary leading-relaxed">
+          <p className="text-base text-text-secondary leading-relaxed max-w-2xl mx-auto">
             CycleVault lets merchants and subscribers automate recurring payments — with full control, zero middlemen.
           </p>
 
-          <div className="pt-2 flex flex-col sm:flex-row items-center gap-4">
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
             <Link
               href="/plans"
               className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-gradient-to-r from-accent-primary to-accent-primary-hover text-bg-primary px-6 py-3.5 rounded-xl font-bold hover:scale-[1.02] active:scale-[0.98] transition-all"
@@ -142,20 +138,6 @@ export default function Home() {
             >
               Go to Dashboard
             </Link>
-          </div>
-        </div>
-
-        {/* 3D Gold Coins Illustration */}
-        <div className="w-full lg:w-1/2 flex justify-center lg:justify-end relative">
-          <div className="absolute inset-0 radial-glow z-0" />
-          <div className="relative z-10 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] hover:scale-105 transition-transform duration-500">
-            <Image
-              src="/hero_coins.png"
-              alt="Recurring Payments"
-              fill
-              className="object-contain"
-              priority
-            />
           </div>
         </div>
       </section>
@@ -213,8 +195,8 @@ export default function Home() {
       </section>
 
       {/* 4. WHY CYCLEVAULT BANNER */}
-      <section className="bg-bg-surface border border-border-subtle p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8 max-w-6xl mx-auto relative overflow-hidden">
-        <div className="space-y-6 max-w-xl text-left z-10">
+      <section className="bg-bg-surface border border-border-subtle p-8 rounded-3xl max-w-6xl mx-auto relative overflow-hidden">
+        <div className="space-y-6 max-w-3xl text-left z-10">
           <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
             Why CycleVault?
           </h3>
@@ -248,16 +230,6 @@ export default function Home() {
             <span>Transparent</span>
             <span>Permissionless</span>
           </div>
-        </div>
-
-        {/* 3D Shield Illustration */}
-        <div className="relative w-[180px] h-[180px] flex shrink-0 justify-center items-center z-10 hover:scale-105 transition-transform duration-500">
-          <Image
-            src="/shield_security.png"
-            alt="Security and Trust"
-            fill
-            className="object-contain"
-          />
         </div>
       </section>
 
@@ -294,8 +266,9 @@ export default function Home() {
       </section>
 
       {/* 6. BUILT FOR TRUSTLESS AUTOMATION */}
-      <section className="bg-bg-surface border border-border-subtle rounded-3xl p-8 max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
-        <div className="space-y-6 text-left">
+      {/* 6. BUILT FOR TRUSTLESS AUTOMATION */}
+      <section className="bg-bg-surface border border-border-subtle rounded-3xl p-8 max-w-6xl mx-auto">
+        <div className="space-y-6 text-left max-w-3xl">
           <span className="text-[10px] text-accent-primary font-bold uppercase tracking-wider bg-accent-primary/10 border border-accent-primary/20 px-3 py-1 rounded-full">
             Architecture
           </span>
@@ -316,20 +289,6 @@ export default function Home() {
               </li>
             ))}
           </ul>
-        </div>
-        
-        {/* Contract Diagram Platform illustration */}
-        <div className="relative flex justify-center lg:justify-end items-center">
-          <div className="absolute inset-0 radial-glow z-0" />
-          
-          <div className="relative z-10 w-[240px] h-[250px] sm:w-[320px] sm:h-[335px] hover:scale-105 transition-transform duration-500">
-            <Image
-              src="/contract_cube.png"
-              alt="Smart Contract Architecture Diagram"
-              fill
-              className="object-contain"
-            />
-          </div>
         </div>
       </section>
 
