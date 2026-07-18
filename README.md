@@ -132,15 +132,6 @@ The application handles various runtime states with explicit, friendly UI prompt
 ### 1. Main Landing Page (Obsidian-Gold Tech Theme)
 ![Landing Page](screenshots/desktop_image.png)
 
-### 2. Freighter Wallet Connection Verification
-![Wallet Connection](readme_assets/wallet_connection.webp)
-
-### 3. Subscription Plans Loaded
-![Plans Dashboard](readme_assets/plans_loaded.webp)
-
-### 4. Mobile Responsive UI Layout
-![Mobile Layout](screenshots/mobile.png)
-
 ---
 
 ## Setup Instructions
