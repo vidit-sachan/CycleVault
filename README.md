@@ -7,7 +7,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 **Live Demo:** [PENDING — Deploy to Cloudflare Pages/Vercel]  
-**Demo Video (1–2 min):** [PENDING — Record walkthrough showing connect -> subscribe -> charge -> cancel]
+**Demo Video (1–2 min):** [CycleVault Demo GIF](screenshots/demo_video.gif) / [CycleVault Demo Video](screenshots/demo_video.mov)
 
 ---
 
