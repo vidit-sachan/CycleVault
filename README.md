@@ -7,7 +7,9 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 **Live Demo:** [https://cyclevault-5nu.pages.dev/](https://cyclevault-5nu.pages.dev/)  
-**Demo Video (1–2 min):** [CycleVault Demo GIF](screenshots/demo_video.gif)
+
+**Demo Video (1–2 min):**
+![CycleVault Demo GIF](screenshots/demo_video.gif)
 
 ---
 
