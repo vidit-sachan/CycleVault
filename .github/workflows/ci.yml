@@ -153,6 +153,13 @@ jobs:
       - name: Build Next.js Static Export
         run: npm --prefix frontend run build
 
+      - name: Debug Secrets
+        run: |
+          TOKEN="${{ secrets.CLOUDFLARE_API_TOKEN }}"
+          ACCOUNT="${{ secrets.CLOUDFLARE_ACCOUNT_ID }}"
+          echo "Token start: ${TOKEN:0:8} ... Token end: ${TOKEN: -5}"
+          echo "Account start: ${ACCOUNT:0:5} ... Account end: ${ACCOUNT: -5}"
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
