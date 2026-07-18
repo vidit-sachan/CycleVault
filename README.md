@@ -87,8 +87,11 @@ Every action is verified on-chain. Below are direct links to active execution re
   * Merchant Registry Init: [`a28af0f2e0f2331255dbf78dd953eec4b25737f69d4092776518bc2b57d18c3d`](https://stellar.expert/explorer/testnet/tx/a28af0f2e0f2331255dbf78dd953eec4b25737f69d4092776518bc2b57d18c3d)
   * Cycle Vault Init: [`674fd5423b9b943cd7d3b91966f1df006a0201074941f7d9963da79eb7264630`](https://stellar.expert/explorer/testnet/tx/674fd5423b9b943cd7d3b91966f1df006a0201074941f7d9963da79eb7264630)
 * **On-Chain Action Triggers:**
-  * Mint Subscriber: [`c6066eef19d6cd58e71b48e5d10bee0cb9b27bb45fef4559fe9242d6c16dc3fe`](https://stellar.expert/explorer/testnet/tx/c6066eef19d6cd58e71b48e5d10bee0cb9b27bb45fef4559fe9242d6c16dc3fe)
-  * Create Billing Plan: [`e6569e812297391d64db07e6a0e69f45dd43f5a70d10f02d2f8489215fdb04c7`](https://stellar.expert/explorer/testnet/tx/e6569e812297391d64db07e6a0e69f45dd43f5a70d10f02d2f8489215fdb04c7)
+  * Create Billing Plan (CYC Token): [`a4eedbb81a37c3531826755eaf85b9c5320279c7f2cd6e8b50e590f574e68d92`](https://stellar.expert/explorer/testnet/tx/a4eedbb81a37c3531826755eaf85b9c5320279c7f2cd6e8b50e590f574e68d92)
+  * Token Allowance Approval: [`4622f4d38e509e63d01c1ea46399eff9b16504c718d56ab771dc878e196b7941`](https://stellar.expert/explorer/testnet/tx/4622f4d38e509e63d01c1ea46399eff9b16504c718d56ab771dc878e196b7941)
+  * Subscribe to Plan: [`1a25b6e332e0ebd342c366143cf57383897551869710f06a40134152626996e6`](https://stellar.expert/explorer/testnet/tx/1a25b6e332e0ebd342c366143cf57383897551869710f06a40134152626996e6)
+  * Process Billing Charge: [`3fd451a273d01c3e3e5e867aab9cb8d15d63092c65ecdc08ed1c43f022d78bde`](https://stellar.expert/explorer/testnet/tx/3fd451a273d01c3e3e5e867aab9cb8d15d63092c65ecdc08ed1c43f022d78bde)
+  * Cancel Subscription: [`f28ca12c4a5d51113f999dc569216dd0e5bd2e73c39b996a855111badf1f10e2`](https://stellar.expert/explorer/testnet/tx/f28ca12c4a5d51113f999dc569216dd0e5bd2e73c39b996a855111badf1f10e2)
 
 ---
 
@@ -121,6 +124,19 @@ The application handles various runtime states with explicit, friendly UI prompt
 | Insufficient prefund | Smart Contract (`InsufficientBalance`) | Warning: "Insufficient CYC balance to collect" |
 | Plan deactivated by merchant | Smart Contract (`PlanInactive`) | Status: "This plan is no longer active" |
 | Signature cancelled | Freighter | Toast warning: "Transaction signature rejected in wallet" |
+
+---
+
+## Screenshots
+
+### 1. Main Landing Page (Obsidian-Gold Tech Theme)
+![Landing Page](readme_assets/landing_page.webp)
+
+### 2. Freighter Wallet Connection Verification
+![Wallet Connection](readme_assets/wallet_connection.webp)
+
+### 3. Subscription Plans Loaded
+![Plans Dashboard](readme_assets/plans_loaded.webp)
 
 ---
 
