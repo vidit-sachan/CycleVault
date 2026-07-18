@@ -7,7 +7,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 **Live Demo:** [PENDING — Deploy to Cloudflare Pages/Vercel]  
-**Demo Video (1–2 min):** [CycleVault Demo GIF](screenshots/demo_video.gif) / [CycleVault Demo Video](screenshots/demo_video.mov)
+**Demo Video (1–2 min):** [CycleVault Demo GIF](screenshots/demo_video.gif)
 
 ---
 
@@ -137,6 +137,9 @@ The application handles various runtime states with explicit, friendly UI prompt
 
 ### 3. Subscription Plans Loaded
 ![Plans Dashboard](readme_assets/plans_loaded.webp)
+
+### 4. Mobile Responsive UI Layout
+![Mobile Layout](screenshots/mobile.png)
 
 ---
 
