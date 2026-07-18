@@ -119,10 +119,43 @@ jobs:
       - name: Create mock deployments file for build
         run: |
           mkdir -p deployments
-          echo '{"deployer":"GDJBG26ITIHHFQBO7IUKEQZVG3QBVGVD72QC2S4QHCFYKW2WV32NWMI2","merchant":"GA22NVWIW47LEOMLOYUJVOS3SO3CEAJKKJFU4JYKYAO3S2LN7NRDEXAT","subscriber":"GC2XFFGJHQMJGVPBE4NQHTTWK7DXC2DKMBED2K7NEL2UPDPTGMEBIGSE","token_id":"CDREDQWMY2LBZ357CFAV4RC5EAT672ALW7XPWMDEZTCJGVQSFEW77ECH","registry_id":"CBGOWXU4QAH7XJS7OTRE2TUHR6HOY4TEC7TZR5NZKLKJJQD7HKMOWEGT","vault_id":"CB7A2ADL43UTBBR5VKCSNQ6WSJNLM6PFFRXN7UUTEOMRA4NIE7HQ4NKX","plan_id":1}' > deployments/testnet.json
+          echo '{"deployer":"GDJBG26ITIHHFQBO7IUKEQZVG3QBVGVD72QC2S4QHCFYKW2WV32NWMI2","merchant":"GA22NVWIW47LEOMLOYUJVOS3SO3CEAJKKJFU4JYKYAO3S2LN7NRDEXAT","subscriber":"GC2XFFGJHQMJGVPBE4NQHTTWK7DXC2DKMBED2K7NEL2UPDPTGMEBIGSE","token_id":"CDNGXULKNHSKXR7KZOSCZINNHXUKAFWFIO7XTZ267IY23MOSWZWUI3KC","registry_id":"CDQQNDJI4CNDQCOT2PFN3Z2T5RGWDILOYR44WTMKZ5M5CNOY3EDOEPB7","vault_id":"CAYBQLDD2ZNQKGWDGFZ4QAPMBJSS6ZGQWIW3WBBRNRA6ZRKRUCAW6ZCC","plan_id":1}' > deployments/testnet.json
 
       - name: Install Dependencies
         run: npm --prefix frontend ci
 
       - name: Build Next.js Static Export
         run: npm --prefix frontend run build
+
+  deploy-frontend:
+    name: Deploy to Cloudflare Pages
+    runs-on: ubuntu-latest
+    needs: build-frontend
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Create mock deployments file for build
+        run: |
+          mkdir -p deployments
+          echo '{"deployer":"GDJBG26ITIHHFQBO7IUKEQZVG3QBVGVD72QC2S4QHCFYKW2WV32NWMI2","merchant":"GA22NVWIW47LEOMLOYUJVOS3SO3CEAJKKJFU4JYKYAO3S2LN7NRDEXAT","subscriber":"GC2XFFGJHQMJGVPBE4NQHTTWK7DXC2DKMBED2K7NEL2UPDPTGMEBIGSE","token_id":"CDNGXULKNHSKXR7KZOSCZINNHXUKAFWFIO7XTZ267IY23MOSWZWUI3KC","registry_id":"CDQQNDJI4CNDQCOT2PFN3Z2T5RGWDILOYR44WTMKZ5M5CNOY3EDOEPB7","vault_id":"CAYBQLDD2ZNQKGWDGFZ4QAPMBJSS6ZGQWIW3WBBRNRA6ZRKRUCAW6ZCC","plan_id":1}' > deployments/testnet.json
+
+      - name: Install Dependencies
+        run: npm --prefix frontend ci
+
+      - name: Build Next.js Static Export
+        run: npm --prefix frontend run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy frontend/out --project-name=cyclevault
