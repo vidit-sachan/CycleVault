@@ -130,7 +130,7 @@ The application handles various runtime states with explicit, friendly UI prompt
 ## Screenshots
 
 ### 1. Main Landing Page (Obsidian-Gold Tech Theme)
-![Landing Page](readme_assets/landing_page.webp)
+![Landing Page](screenshots/desktop_image.png)
 
 ### 2. Freighter Wallet Connection Verification
 ![Wallet Connection](readme_assets/wallet_connection.webp)
